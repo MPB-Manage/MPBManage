@@ -1,7 +1,7 @@
 package dk.mpb.manage.security.service;
 
 import dk.mpb.manage.security.entity.UserWithRoles;
-import dk.mpb.manage.security.repository.UserWithRolesRepository;
+import dk.mpb.manage.security.repository.UserAccountSecurityRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,12 +13,10 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
-
-  //To ensure same response is made for wrong username OR password
   public static final String WRONG_USERNAME_OR_PASSWORD = "Incorrect username or password";
-  UserWithRolesRepository userWithRolesRepository;
+  UserAccountSecurityRepository userWithRolesRepository;
 
-  public UserDetailsServiceImp(UserWithRolesRepository userWithRolesRepository) {
+  public UserDetailsServiceImp(UserAccountSecurityRepository userWithRolesRepository) {
     this.userWithRolesRepository = userWithRolesRepository;
   }
 

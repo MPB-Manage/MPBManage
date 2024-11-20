@@ -13,7 +13,7 @@ package dk.mpb.manage.security.entity;
  * </pre>
  * </p>
  * <p>
- * The roles defined in this enum are 'USER', 'SUB_USER' and 'ADMIN'.
+ * The roles defined in this enum are 'USER', and 'ADMIN'.
  * </p>
  * <p>
  * Additionally, a utility method {@link #fromString(String)} is provided
@@ -24,7 +24,6 @@ package dk.mpb.manage.security.entity;
  */
 public enum Role {
     USER,
-    SUB_USER,
     ADMIN;
     public static Role fromString(String roleString) {
         return Role.valueOf(roleString.trim().toUpperCase());

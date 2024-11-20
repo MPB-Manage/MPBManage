@@ -23,16 +23,4 @@ public class UserWithRoleController {
   public UserWithRolesResponse addUserWithRoles(@RequestBody UserWithRolesRequest request) {
     return userWithRolesService.addUserWithRoles (request, DEFAULT_ROLE_TO_ASSIGN);
   }
-
-  @PreAuthorize("hasAuthority('ADMIN')")
-  @PatchMapping("/add-role/{username}/{role}")
-  public UserWithRolesResponse addRole(@PathVariable String username, @PathVariable String role) {
-    return userWithRolesService.addRole(username, Role.fromString(role));
-  }
-
-  @PreAuthorize("hasAuthority('ADMIN')")
-  @PatchMapping("/remove-role/{username}/{role}")
-  public UserWithRolesResponse removeRole(@PathVariable String username, @PathVariable String role) {
-    return userWithRolesService.removeRole(username, Role.fromString(role));
-  }
 }

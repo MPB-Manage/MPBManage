@@ -9,10 +9,9 @@ import java.util.Arrays;
 
 @Configuration
 public class CorsConfig {
-
-    //When you know the domain name for your client, add it below before deployment
     private static final String[] ALLOWED_ORIGINS = new String[] {
             "*",
+            //"https://lobster-app-8gufx.ondigitalocean.app/",
     };
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
