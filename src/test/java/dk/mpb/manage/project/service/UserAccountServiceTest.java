@@ -9,11 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,7 +32,7 @@ public class UserAccountServiceTest {
     }
 
     UserAccount testUserSetup() {
-        return new UserAccount("testUser", "testPassword", "testEmail");
+        return new UserAccount("testUser", "testPassword");
     }
 
     @Test
@@ -40,7 +42,6 @@ public class UserAccountServiceTest {
         List<UserAccountResponse> userAccounts = userAccountService.getAllUserAccounts();
         assertEquals(1, userAccounts.size());
         assertEquals(testUser.getUsername(), userAccounts.get(0).getUsername());
-        assertEquals(testUser.getEmail(), userAccounts.get(0).getEmail());
     }
 
     @Test
@@ -49,34 +50,40 @@ public class UserAccountServiceTest {
         when(userAccountRepository.findById(testUser.getUsername())).thenReturn(Optional.of(testUser));
         UserAccountResponse userAccount = userAccountService.getUserAccount(testUser.getUsername());
         assertEquals(testUser.getUsername(), userAccount.getUsername());
-        assertEquals(testUser.getEmail(), userAccount.getEmail());
     }
 
     @Test
     void testCreateUserAccount() {
         UserAccount testUser = testUserSetup();
-        when(userAccountRepository.existsByEmail(testUser.getEmail())).thenReturn(false);
-        UserAccountRequest testUserRequest = new UserAccountRequest(testUser.getUsername(), testUser.getPassword(), testUser.getEmail());
+        UserAccountRequest testUserRequest = new UserAccountRequest(testUser.getUsername(), testUser.getPassword());
         userAccountService.createUserAccount(testUserRequest);
 
         verify(userAccountRepository, times(1)).save(argThat(savedUser ->
-                savedUser.getUsername().equals(testUser.getUsername()) &&
-                        savedUser.getEmail().equals(testUser.getEmail())
-        ));
-        verify(userAccountRepository, times(1)).existsByEmail(testUser.getEmail());
+                savedUser.getUsername().equals(testUser.getUsername()))
+        );
     }
 
     @Test
     void testUpdateUserAccount() {
         UserAccount testUser = testUserSetup();
         when(userAccountRepository.findById(testUser.getUsername())).thenReturn(Optional.of(testUser));
-        UserAccountRequest testUserRequest = new UserAccountRequest(testUser.getUsername(), "NewTestPassword", testUser.getEmail());
+        UserAccountRequest testUserRequest = new UserAccountRequest(testUser.getUsername(), "NewTestPassword");
         userAccountService.updateUserAccount(testUser.getUsername(), testUserRequest);
         verify(userAccountRepository, times(1)).save(argThat(savedUser ->
                 savedUser.getUsername().equals(testUser.getUsername()) &&
-                        savedUser.getEmail().equals(testUser.getEmail()) &&
                         savedUser.getPassword() != null && !savedUser.getPassword().isEmpty()
         ));
+    }
+
+    @Test
+    void testUpdateUserAccountSamePassword() {
+        UserAccount testUser = testUserSetup();
+        when(userAccountRepository.findById(testUser.getUsername())).thenReturn(Optional.of(testUser));
+        UserAccountRequest testUserRequest = new UserAccountRequest(testUser.getUsername(), "testPassword");
+
+        assertThrows(ResponseStatusException.class, () -> {
+            userAccountService.updateUserAccount(testUser.getUsername(), testUserRequest);
+        });
     }
 
     @Test

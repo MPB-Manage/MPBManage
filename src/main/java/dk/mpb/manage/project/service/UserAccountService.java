@@ -42,12 +42,10 @@ public class UserAccountService {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         UserAccount userAccount = userAccountRepository.findById(name).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-        userAccount.setPassword(userAccountRequest.getPassword());
-        if(!bCryptPasswordEncoder.matches(userAccountRequest.getPassword(), userAccount.getPassword())) {
-            userAccount.setPassword(bCryptPasswordEncoder.encode(userAccountRequest.getPassword()));
-        } else {
+        if (bCryptPasswordEncoder.matches(userAccountRequest.getPassword(), userAccount.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password is the same");
         }
+        userAccount.setPassword(bCryptPasswordEncoder.encode(userAccountRequest.getPassword()));
         userAccount.setUsername(userAccountRequest.getUsername());
         userAccountRepository.save(userAccount);
         return ResponseEntity.ok(true);
