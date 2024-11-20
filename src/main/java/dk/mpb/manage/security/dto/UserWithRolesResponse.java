@@ -20,6 +20,5 @@ public class UserWithRolesResponse {
     public UserWithRolesResponse(UserWithRoles userWithRoles) {
         this.userName = userWithRoles.getUsername();
         this.roleNames = userWithRoles.getRoles().stream().map(role -> role.toString()).collect(Collectors.toList());
-        this.email = userWithRoles.getEmail();
     }
 }

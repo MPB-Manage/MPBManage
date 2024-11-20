@@ -1,8 +1,6 @@
 package dk.mpb.manage.security.error;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
@@ -20,19 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class CustomOAuth2AuthenticationEntryPoint implements AuthenticationEntryPoint {
-  private static final Logger logger = LoggerFactory.getLogger(CustomOAuth2AuthenticationEntryPoint.class);
-  private String realmName;
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
           throws IOException {
-    logger.warn(e.getLocalizedMessage());
-    //logger.warn(e.getLocalizedMessage(),e);
     HttpStatus status = HttpStatus.UNAUTHORIZED;
     String errorMessage = "Insufficient authentication details";
     Map<String, String> parameters = new LinkedHashMap<>();
-    if (Objects.nonNull(realmName)) {
-      parameters.put("realm", realmName);
-    }
     if (e instanceof OAuth2AuthenticationException) {
       OAuth2Error error = ((OAuth2AuthenticationException) e).getError();
       parameters.put("error", error.getErrorCode());
@@ -43,8 +34,7 @@ public class CustomOAuth2AuthenticationEntryPoint implements AuthenticationEntry
       if (StringUtils.hasText(error.getUri())) {
         parameters.put("error_uri", error.getUri());
       }
-      if (error instanceof BearerTokenError) {
-        BearerTokenError bearerTokenError = (BearerTokenError) error;
+      if (error instanceof BearerTokenError bearerTokenError) {
         if (StringUtils.hasText(bearerTokenError.getScope())) {
           parameters.put("scope", bearerTokenError.getScope());
         }

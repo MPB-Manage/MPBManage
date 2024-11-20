@@ -31,11 +31,8 @@ public class UserWithRoles implements UserDetails {
   private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   @Id
-  @Column(nullable = false, length = 50, unique = true, name = "id")
-  String username;
-
   @Column(nullable = false, length = 50, unique = true)
-  String email;
+  String username;
 
   @Column(nullable = false, length = 60)
   String password;
@@ -49,7 +46,7 @@ public class UserWithRoles implements UserDetails {
   private boolean enabled = true;
 
   @Enumerated(EnumType.STRING)
-  @Column(columnDefinition = "ENUM('USER','SUB_USER','ADMIN')")
+  @Column(columnDefinition = "ENUM('USER', 'ADMIN')")
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(name = "security_role")
   List<Role> roles = new ArrayList<>();
@@ -57,10 +54,9 @@ public class UserWithRoles implements UserDetails {
   public UserWithRoles() {
   }
 
-  public UserWithRoles(String username, String password, String email) {
+  public UserWithRoles(String username, String password) {
     this.username = username;
     setPassword(password);
-    this.email = email;
   }
 
   public void setPassword(String pw) {
@@ -82,20 +78,5 @@ public class UserWithRoles implements UserDetails {
     if (roles.contains(roleToRemove)) {
       roles.remove(roleToRemove);
     }
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return enabled;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return enabled;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return enabled;
   }
 }

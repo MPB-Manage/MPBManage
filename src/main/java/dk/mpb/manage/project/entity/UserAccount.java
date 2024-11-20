@@ -16,7 +16,7 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "USER_TYPE")
 public class UserAccount extends UserWithRoles {
-    public UserAccount(String username, String password, String email) {
-        super(username, password, email);
+    public UserAccount(String username, String password) {
+        super(username, password);
     }
 }

@@ -60,9 +60,10 @@ public class SecurityConfig {
                                     .jwtAuthenticationConverter(authenticationConverter())
                             )
                             .authenticationEntryPoint(new CustomOAuth2AuthenticationEntryPoint()));
-    http.authorizeHttpRequests((authorize) -> authorize
+
+    http
+            .authorizeHttpRequests((authorize) -> authorize
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/auth/login")).permitAll()
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/user-with-role")).permitAll() //Clients can create a user for themself
 
             //Allow index.html and everything else on root level. So make sure to put ALL your endpoints under /api
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET,"/*")).permitAll()
@@ -71,13 +72,11 @@ public class SecurityConfig {
 
 
             // USER ENDPOINTS
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/users")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/users/user-as-authenticated")).hasAuthority("USER")
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/api/users/user-as-authenticated")).hasAuthority("USER")
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/users/user-as-authenticated")).hasAuthority("USER")
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/users")).hasAuthority("ADMIN")
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/users/{username}")).hasAuthority("ADMIN")
-            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PATCH, "/api/users/user-as-authenticated")).hasAuthority("USER")
 
             .anyRequest().authenticated());
 
