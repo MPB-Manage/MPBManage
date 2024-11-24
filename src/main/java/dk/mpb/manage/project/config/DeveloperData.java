@@ -6,7 +6,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 
-import static dk.mpb.manage.security.entity.Role.ADMIN;
 import static dk.mpb.manage.security.entity.Role.USER;
 
 @Configuration
