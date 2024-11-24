@@ -20,10 +20,6 @@ public class DeveloperData implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Create a default admin and user
-        UserAccount admin = new UserAccount("admin@admin.dk", "1234");
-        admin.addRole(ADMIN);
-        userAccountRepository.save(admin);
-
         UserAccount userAccount = new UserAccount("user@user.dk", "1234");
         userAccount.addRole(USER);
         userAccountRepository.save(userAccount);
