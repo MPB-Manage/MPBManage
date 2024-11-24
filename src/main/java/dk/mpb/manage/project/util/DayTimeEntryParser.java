@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DayTimeEntryParser {
-
     public List<DayTimeEntry> parseReservations(List<Reservation> reservations) {
         List<DayTimeEntry> dayTimeEntries = new ArrayList<>();
 
