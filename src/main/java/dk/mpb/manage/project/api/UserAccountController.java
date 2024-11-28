@@ -36,6 +36,12 @@ public class UserAccountController {
         userAccountService.createUserAccount(userAccountRequest);
     }
 
+    // ADMIN - add property to useraccount
+    @PostMapping("/properties")
+    public void addPropertyToUserAccount(Principal principal, @RequestParam int property) {
+        userAccountService.addPropertyToUserAccount(principal.getName(), property);
+    }
+
     // USER - update useraccount
     @PutMapping("/user-as-authenticated")
     public ResponseEntity<Boolean> updateUserAccount(Principal principal, @RequestBody UserAccountRequest userAccountRequest) {
