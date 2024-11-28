@@ -2,7 +2,9 @@ package dk.mpb.manage.project.service;
 
 import dk.mpb.manage.project.dto.UserAccountRequest;
 import dk.mpb.manage.project.dto.UserAccountResponse;
+import dk.mpb.manage.project.entity.Property;
 import dk.mpb.manage.project.entity.UserAccount;
+import dk.mpb.manage.project.repository.PropertyRepository;
 import dk.mpb.manage.project.repository.UserAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,15 +26,21 @@ public class UserAccountServiceTest {
     @Mock
     UserAccountRepository userAccountRepository;
 
+    @Mock
+    PropertyRepository propertyRepository;
+
     UserAccountService userAccountService;
 
     @BeforeEach
     void setUp() {
-        userAccountService = new UserAccountService(userAccountRepository);
+        userAccountService = new UserAccountService(userAccountRepository, propertyRepository);
     }
 
     UserAccount testUserSetup() {
         return new UserAccount("testUser", "testPassword");
+    }
+    Property testPropertySetup() {
+        return new Property("testProperty");
     }
 
     @Test
@@ -61,6 +69,18 @@ public class UserAccountServiceTest {
         verify(userAccountRepository, times(1)).save(argThat(savedUser ->
                 savedUser.getUsername().equals(testUser.getUsername()))
         );
+    }
+
+    @Test
+    void testAddPropertyToUserAccount() {
+        UserAccount testUser = testUserSetup();
+        Property testProperty = testPropertySetup();
+        when(userAccountRepository.findById(testUser.getUsername())).thenReturn(Optional.of(testUser));
+        when(propertyRepository.findById(testProperty.getId())).thenReturn(Optional.of(testProperty));
+        userAccountService.addPropertyToUserAccount(testUser.getUsername(), testProperty.getId());
+        verify(propertyRepository, times(1)).save(argThat(savedProperty ->
+                savedProperty.getUserAccount().getUsername().equals(testUser.getUsername())
+        ));
     }
 
     @Test
