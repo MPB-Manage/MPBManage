@@ -12,19 +12,21 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Property extends DateTimeInfo {
+public class PropertySetting extends DateTimeInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String street;
+    private String city;
+    private String zipCode;
+    private String country;
+    private String phone;
+    private String email;
     @OneToOne
-    @JoinColumn(name = "user_account_id")
-    private UserAccount userAccount;
-    @OneToOne(mappedBy = "property", cascade = CascadeType.ALL, optional = true)
-    private PropertySetting propertySetting;
+    @JoinColumn(name = "property_id", referencedColumnName = "id")
+    private Property property;
 
-    public Property(String name) {
-        this.name = name;
-        this.propertySetting = new PropertySetting(this);
+    public PropertySetting(Property property) {
+        this.property = property;
     }
 }

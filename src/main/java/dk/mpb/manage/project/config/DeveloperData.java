@@ -23,7 +23,7 @@ public class DeveloperData implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Create a test property
-        Property property = new Property(1, "Test Property", null);
+        Property property = new Property("Test Property");
 
         // Create a test user
         UserAccount userAccount = new UserAccount("user@user.dk", "1234");
