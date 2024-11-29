@@ -22,6 +22,8 @@ public class Property extends DateTimeInfo {
     private UserAccount userAccount;
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL, optional = true)
     private PropertySetting propertySetting;
+    @OneToOne(mappedBy = "property", cascade = CascadeType.ALL, optional = true)
+    private ReservationSetting reservationSetting;
 
     public Property(String name) {
         this.name = name;
