@@ -14,8 +14,8 @@ import java.util.List;
 
 @Service
 public class PropertySettingService {
-    PropertyRepository propertyRepository;
-    PropertySettingRepository propertySettingRepository;
+    private PropertyRepository propertyRepository;
+    private PropertySettingRepository propertySettingRepository;
 
     public PropertySettingService(PropertyRepository propertyRepository, PropertySettingRepository propertySettingRepository) {
         this.propertyRepository = propertyRepository;
