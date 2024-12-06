@@ -10,7 +10,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/property_setting")
+@RequestMapping("/api/property_settings")
 public class PropertySettingController {
     private PropertySettingService propertySettingService;
 

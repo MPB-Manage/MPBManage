@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,9 +27,15 @@ public class Property extends DateTimeInfo {
     private PropertySetting propertySetting;
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL, optional = true)
     private ReservationSetting reservationSetting;
-
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+        reservation.setProperty(this);
+    }
     public Property(String name) {
         this.name = name;
         this.propertySetting = new PropertySetting(this);
+        this.reservationSetting = new ReservationSetting(this);
     }
 }
