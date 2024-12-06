@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/api/reservation_setting")
+@RequestMapping("/api/reservation_settings")
 public class ReservationSettingController {
     private ReservationSettingService reservationSettingService;
 
