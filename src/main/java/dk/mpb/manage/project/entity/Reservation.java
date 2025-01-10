@@ -50,6 +50,5 @@ public class Reservation {
         this.billingZip = billingZip;
         this.billingCountry = billingCountry;
         this.property = property;
-
     }
 }

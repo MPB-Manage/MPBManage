@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
-    @Query(value = "SELECT * FROM property WHERE user_account_name = :name", nativeQuery = true)
+    @Query(value = "SELECT * FROM property WHERE user_account_id = :name", nativeQuery = true)
     Optional<Property> findByUserAccountName(String name);
 }

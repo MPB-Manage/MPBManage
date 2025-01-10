@@ -29,10 +29,8 @@ public class Property extends DateTimeInfo {
     private ReservationSetting reservationSetting;
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
-    public void addReservation(Reservation reservation) {
-        reservations.add(reservation);
-        reservation.setProperty(this);
-    }
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    private List<Client> clients = new ArrayList<>();
     public Property(String name) {
         this.name = name;
         this.propertySetting = new PropertySetting(this);

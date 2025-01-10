@@ -17,9 +17,15 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    // USER - get all reservations for the current year
+    // USER - get all reservations
     @GetMapping()
-    public List<ReservationResponse> getAllReservationsByYear(Principal principal, @RequestParam int year) {
+    public List<ReservationResponse> getAllReservations(Principal principal) {
+        return reservationService.getAllReservations(principal.getName());
+    }
+
+    // USER - get all reservations for the current year
+    @GetMapping("/{year}")
+    public List<ReservationResponse> getAllReservationsByYear(Principal principal, @PathVariable int year) {
         return reservationService.getAllReservationsByYear(principal.getName(), year);
     }
 

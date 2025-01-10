@@ -74,6 +74,19 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/users")).hasAuthority("ADMIN")
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/users/{username}")).hasAuthority("ADMIN")
 
+             // PROPERTY ENDPOINTS
+
+             // RESERVATION ENDPOINTS
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/reservations")).hasAuthority("USER")
+
+             // CLIENT ENDPOINTS
+
+             // RESERVATION SETTING ENDPOINTS
+
+             // PROPERTY SETTING ENDPOINTS
+
+             // ADDITIONAL EXPENSES ENDPOINTS
+
             .anyRequest().authenticated());
 
     return http.build();

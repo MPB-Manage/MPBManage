@@ -68,9 +68,6 @@ public class AuthenticationController {
   public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
     String ip = httpRequest.getRemoteAddr();
     Bucket bucket = getBucket(ip);
-    if (!bucket.tryConsume(1)) {
-      throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "Too many requests, try again later.");
-    }
 
     try {
       UsernamePasswordAuthenticationToken uat = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
@@ -92,12 +89,14 @@ public class AuthenticationController {
       JwsHeader jwsHeader = JwsHeader.with(() -> "HS256").build();
       String token = encoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue();
 
-
       List<String> roles = user.getRoles().stream().map(Enum::toString).collect(Collectors.toList());
       return ResponseEntity.ok()
               .body(new LoginResponse(user.getUsername(), token, roles));
 
     } catch (BadCredentialsException e) {
+      if (!bucket.tryConsume(1)) {
+        throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "Too many requests, try again later.");
+      }
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, UserDetailsServiceImp.WRONG_USERNAME_OR_PASSWORD);
     }
   }

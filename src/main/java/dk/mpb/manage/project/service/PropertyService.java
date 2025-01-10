@@ -18,6 +18,10 @@ public class PropertyService {
         this.propertyRepository = propertyRepository;
     }
 
+    /**
+     * Get all properties from the database
+     * @return List of PropertyResponse
+     * */
     public List<PropertyResponse> getProperty() {
         List<Property> properties = propertyRepository.findAll();
         return properties.stream().map(property -> new PropertyResponse(property)).toList();

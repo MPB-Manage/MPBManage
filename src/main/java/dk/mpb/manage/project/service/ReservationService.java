@@ -21,12 +21,18 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
         this.propertyRepository = propertyRepository;
     }
+    public List<ReservationResponse> getAllReservations(String name) {
+        Property property = propertyRepository.findByUserAccountName(name)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
+        List<Reservation> reservations = reservationRepository.findAllByPropertyId(property.getId());
+        System.out.println(reservations);
+        return reservations.stream().map(res -> new ReservationResponse(res)).toList();
+    }
     public List<ReservationResponse> getAllReservationsByYear(String name, int year) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
         List<Reservation> reservations = reservationRepository.findAllByPropertyIdAndYear(property.getId(), year);
-        List<ReservationResponse> reservationResponses = reservations.stream().map(res -> new ReservationResponse(res)).toList();
-        return reservationResponses;
+        return reservations.stream().map(res -> new ReservationResponse(res)).toList();
     }
 
     public void createReservation(String name, ReservationRequest reservationRequest) {
