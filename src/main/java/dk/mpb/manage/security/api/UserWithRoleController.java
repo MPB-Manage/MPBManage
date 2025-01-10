@@ -7,6 +7,9 @@ import dk.mpb.manage.security.service.UserWithRolesService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ *  User with role controller
+ * */
 @RestController
 @RequestMapping("/api/user-with-role")
 public class UserWithRoleController {
@@ -19,6 +22,9 @@ public class UserWithRoleController {
     this.userWithRolesService = userWithRolesService;
   }
 
+  /**
+   *  Add user with roles
+   * */
   @PostMapping
   public UserWithRolesResponse addUserWithRoles(@RequestBody UserWithRolesRequest request) {
     return userWithRolesService.addUserWithRoles (request, DEFAULT_ROLE_TO_ASSIGN);

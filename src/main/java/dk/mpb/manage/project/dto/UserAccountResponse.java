@@ -8,6 +8,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ *  User account response DTO
+ * */
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)

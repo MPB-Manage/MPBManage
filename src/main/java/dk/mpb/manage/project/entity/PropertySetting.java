@@ -8,32 +8,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- *  Client entity
+ *  Property setting entity
  * */
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Client extends DateTimeInfo {
+public class PropertySetting extends DateTimeInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int telephoneNumber;
-    private String name;
+    private String street;
+    private String city;
+    private String zipCode;
+    private String country;
+    private String phone;
     private String email;
-    private String description;
     /**
      *  Property entity reference
      * */
-    @ManyToOne
-    @JoinColumn(name = "property_id")
+    @OneToOne
+    @JoinColumn(name = "property_id", referencedColumnName = "id")
     private Property property;
 
-    public Client(int telephoneNumber, String name, String email, String description, Property property) {
-        this.telephoneNumber = telephoneNumber;
-        this.name = name;
-        this.email = email;
-        this.description = description;
+    public PropertySetting(Property property) {
         this.property = property;
     }
 }

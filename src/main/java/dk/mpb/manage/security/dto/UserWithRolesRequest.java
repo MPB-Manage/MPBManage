@@ -2,6 +2,9 @@ package dk.mpb.manage.security.dto;
 
 import lombok.*;
 
+/**
+ *  User with roles request DTO
+ * */
 @Getter
 @Setter
 @AllArgsConstructor

@@ -11,6 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+/**
+ *  User details service implementation
+ * */
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
   public static final String WRONG_USERNAME_OR_PASSWORD = "Incorrect username or password";
@@ -20,6 +23,9 @@ public class UserDetailsServiceImp implements UserDetailsService {
     this.userWithRolesRepository = userWithRolesRepository;
   }
 
+  /**
+   *  Load user by username
+   * */
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     final Optional<UserWithRoles> optionalUser = userWithRolesRepository.findById(username);

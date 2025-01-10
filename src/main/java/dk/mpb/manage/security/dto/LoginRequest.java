@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Login request DTO
+ * */
 @Getter
 @Setter
 @AllArgsConstructor

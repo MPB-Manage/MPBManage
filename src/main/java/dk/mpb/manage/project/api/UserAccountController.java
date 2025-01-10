@@ -18,37 +18,57 @@ public class UserAccountController {
         this.userAccountService = userAccountService;
     }
 
-    // ADMIN - retrieve all useraccounts
+    /**
+     *  Get all useraccounts
+     * */
     @GetMapping()
     public List<UserAccountResponse> getAllUserAccounts() {
         return userAccountService.getAllUserAccounts();
     }
 
-    // USER - retrieve useraccount
+    /**
+     *  Get useraccount by id
+     * */
     @GetMapping("/user-as-authenticated")
     public UserAccountResponse getUserAccountById(Principal principal) {
         return userAccountService.getUserAccount(principal.getName());
     }
 
-    // Admin - create user
+    /**
+     *  Create a useraccount
+     * */
     @PostMapping()
     public void createUserAccount(@RequestBody UserAccountRequest userAccountRequest) {
         userAccountService.createUserAccount(userAccountRequest);
     }
 
-    // USER - update useraccount
+    /**
+     *  Add a property to a useraccount
+     * */
+    @PostMapping("/properties")
+    public void addPropertyToUserAccount(Principal principal, @RequestParam int property) {
+        userAccountService.addPropertyToUserAccount(principal.getName(), property);
+    }
+
+    /**
+     *  Update a useraccount
+     * */
     @PutMapping("/user-as-authenticated")
     public ResponseEntity<Boolean> updateUserAccount(Principal principal, @RequestBody UserAccountRequest userAccountRequest) {
         return userAccountService.updateUserAccount(principal.getName(), userAccountRequest);
     }
 
-    // ADMIN - delete useraccount
+    /**
+     *  Delete a useraccount by id
+     * */
     @DeleteMapping("/{id}")
     public void deleteUserAccountById(@PathVariable String id) {
         userAccountService.deleteUserAccountById(id);
     }
 
-    // USER - delete useraccount
+    /**
+     *  Delete a useraccount
+     * */
     @DeleteMapping("/user-as-authenticated")
     public void deleteUserAccount(Principal principal) {
         userAccountService.deleteUserAccount(principal.getName());

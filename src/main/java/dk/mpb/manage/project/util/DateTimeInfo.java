@@ -8,6 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ *  Date time info class for created and updated
+ * */
 @MappedSuperclass
 @Getter
 @Setter

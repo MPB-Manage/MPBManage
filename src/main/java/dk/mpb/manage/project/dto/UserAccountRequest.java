@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ *  User account request DTO
+ * */
 @Getter
 @Setter
 @AllArgsConstructor
