@@ -84,17 +84,30 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/users/{username}")).hasAuthority("ADMIN")
 
              // PROPERTY ENDPOINTS
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/properties")).hasAuthority("ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/properties")).hasAuthority("ADMIN")
 
              // RESERVATION ENDPOINTS
              .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/reservations")).hasAuthority("USER")
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/reservations/{year}")).hasAuthority("USER")
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/reservations")).hasAuthority("USER")
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/reservations")).hasAuthority("USER")
 
              // CLIENT ENDPOINTS
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/clients")).hasAuthority("USER")
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/clients")).hasAuthority("USER")
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/clients")).hasAuthority("USER")
 
              // RESERVATION SETTING ENDPOINTS
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PATCH, "/reservation_settings")).hasAuthority("USER")
 
              // PROPERTY SETTING ENDPOINTS
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PATCH, "/property_settings")).hasAuthority("USER")
 
              // ADDITIONAL EXPENSES ENDPOINTS
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/additionalexpenses")).hasAuthority("USER")
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/additionalexpenses")).hasAuthority("USER")
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/additionalexpenses")).hasAuthority("USER")
 
             .anyRequest().authenticated());
 
