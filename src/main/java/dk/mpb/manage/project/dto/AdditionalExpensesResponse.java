@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *  Property request DTO
+ *  Additional expenses response DTO
  * */
 @Getter
 @Setter
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PropertyRequest {
-    String name;
+public class AdditionalExpensesResponse {
+    private double amount;
+    private String description;
 }

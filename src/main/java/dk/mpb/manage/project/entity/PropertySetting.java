@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *  Property setting entity
+ * */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,6 +25,9 @@ public class PropertySetting extends DateTimeInfo {
     private String country;
     private String phone;
     private String email;
+    /**
+     *  Property entity reference
+     * */
     @OneToOne
     @JoinColumn(name = "property_id", referencedColumnName = "id")
     private Property property;

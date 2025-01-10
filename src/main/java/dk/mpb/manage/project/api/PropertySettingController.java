@@ -18,7 +18,9 @@ public class PropertySettingController {
         this.propertySettingService = propertySettingService;
     }
 
-    //User - update property setting
+    /**
+     *  Update all property settings for a property
+     * */
     @PatchMapping
     public PropertySettingResponse updatePropertySettingById(Principal principal, @RequestBody PropertySettingRequest propertySettingRequest) {
         return propertySettingService.updatePropertySetting(principal.getName(), propertySettingRequest);

@@ -3,16 +3,22 @@ package dk.mpb.manage.project.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import dk.mpb.manage.project.entity.Reservation;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ *  Reservation response DTO
+ * */
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReservationResponse {
+    private int reservationId;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private double price;
@@ -28,6 +34,7 @@ public class ReservationResponse {
     private String billingCountry;
 
     public ReservationResponse(Reservation reservation){
+        this.reservationId = reservation.getId();
         this.startDateTime = reservation.getStartDateTime();
         this.endDateTime = reservation.getEndDateTime();
         this.price = reservation.getPrice();

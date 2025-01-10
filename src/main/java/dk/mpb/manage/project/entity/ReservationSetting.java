@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *  Reservation setting entity
+ * */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,6 +32,9 @@ public class ReservationSetting extends DateTimeInfo {
     private double OctoberPrice;
     private double NovemberPrice;
     private double DecemberPrice;
+    /**
+     *  Property entity reference
+     * */
     @OneToOne
     @JoinColumn(name = "property_id", referencedColumnName = "id")
     private Property property;

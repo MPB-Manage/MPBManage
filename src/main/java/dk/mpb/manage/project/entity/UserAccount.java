@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *  User account entity
+ * */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,8 +16,14 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "USER_TYPE")
 public class UserAccount extends UserWithRoles {
+    /**
+     *  Property entity reference
+     * */
     @OneToOne(mappedBy = "userAccount")
     private Property property;
+    /**
+     *  Add property to user account
+     * */
     public void addProperty(Property property) {
         this.property = property;
         property.setUserAccount(this);

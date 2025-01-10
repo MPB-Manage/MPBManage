@@ -34,15 +34,24 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 
+/**
+ *  Security configuration
+ * */
 @Configuration
 public class SecurityConfig {
 
+  /**
+   *  Token secret
+   * */
   @Value("${app.secret-key}")
   private String tokenSecret;
 
   @Autowired
   CorsConfigurationSource corsConfigurationSource;
 
+  /**
+   *  Security filter chain
+   * */
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
     MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
@@ -74,16 +83,35 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/users")).hasAuthority("ADMIN")
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/users/{username}")).hasAuthority("ADMIN")
 
+             // PROPERTY ENDPOINTS
+
+             // RESERVATION ENDPOINTS
+             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/reservations")).hasAuthority("USER")
+
+             // CLIENT ENDPOINTS
+
+             // RESERVATION SETTING ENDPOINTS
+
+             // PROPERTY SETTING ENDPOINTS
+
+             // ADDITIONAL EXPENSES ENDPOINTS
+
             .anyRequest().authenticated());
 
     return http.build();
   }
 
+  /**
+   *  Password encoder
+   * */
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
+  /**
+   *  Authentication converter
+   * */
   @Bean
   public JwtAuthenticationConverter authenticationConverter() {
     JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
@@ -95,16 +123,25 @@ public class SecurityConfig {
     return jwtAuthenticationConverter;
   }
 
+  /**
+   *  Secret key
+   * */
   @Bean
   public SecretKey secretKey() {
     return new SecretKeySpec(tokenSecret.getBytes(), "HmacSHA256");
   }
 
+  /**
+   *  Jwt decoder
+   * */
   @Bean
   public JwtDecoder jwtDecoder() {
     return NimbusJwtDecoder.withSecretKey(secretKey()).build();
   }
 
+  /**
+   *  Jwt encoder
+   * */
   @Bean
   public JwtEncoder jwtEncoder() {
     return new NimbusJwtEncoder(
@@ -112,6 +149,9 @@ public class SecurityConfig {
     );
   }
 
+  /**
+   *  Authentication manager
+   * */
   @Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
           throws Exception {

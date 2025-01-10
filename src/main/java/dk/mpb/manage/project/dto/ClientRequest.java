@@ -7,18 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- *  Property setting request DTO
+ *  Client request DTO
  * */
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PropertySettingRequest {
-    private String street;
-    private String city;
-    private String zipCode;
-    private String country;
-    private String phone;
+public class ClientRequest {
+    private int telephoneNumber;
+    private String name;
     private String email;
+    private String description;
 }

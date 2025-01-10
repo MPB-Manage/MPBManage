@@ -12,6 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ *  Property setting service
+ * */
 @Service
 public class PropertySettingService {
     private PropertyRepository propertyRepository;
@@ -21,6 +24,10 @@ public class PropertySettingService {
         this.propertyRepository = propertyRepository;
         this.propertySettingRepository = propertySettingRepository;
     }
+
+    /**
+     *  Get all property settings
+     * */
     public PropertySettingResponse updatePropertySetting(String name, PropertySettingRequest propertySettingRequest) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));

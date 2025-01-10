@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ *  Login response DTO
+ * */
 @Getter
 @Setter
 @NoArgsConstructor

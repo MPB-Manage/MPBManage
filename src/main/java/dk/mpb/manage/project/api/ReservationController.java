@@ -17,19 +17,33 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    // USER - get all reservations for the current year
+    /**
+     *  Get all reservations
+     * */
     @GetMapping()
-    public List<ReservationResponse> getAllReservationsByYear(Principal principal, @RequestParam int year) {
+    public List<ReservationResponse> getAllReservations(Principal principal) {
+        return reservationService.getAllReservations(principal.getName());
+    }
+
+    /**
+     *  Get all reservations by year
+     * */
+    @GetMapping("/{year}")
+    public List<ReservationResponse> getAllReservationsByYear(Principal principal, @PathVariable int year) {
         return reservationService.getAllReservationsByYear(principal.getName(), year);
     }
 
-    // User - create reservation
+    /**
+     *  Get all reservations by month
+     * */
     @PostMapping()
     public void createReservation(Principal principal, @RequestBody ReservationRequest reservationRequest) {
         reservationService.createReservation(principal.getName(), reservationRequest);
     }
 
-    // USER - delete reservation
+    /**
+     *  Update a reservation
+     * */
     @DeleteMapping("/{id}")
     public void deleteReservation(Principal principal, @PathVariable int id) {
         reservationService.deleteReservation(principal.getName(), id);

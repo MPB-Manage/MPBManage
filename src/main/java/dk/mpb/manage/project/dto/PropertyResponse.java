@@ -5,6 +5,9 @@ import dk.mpb.manage.project.entity.Property;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ *  Property response DTO
+ * */
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
