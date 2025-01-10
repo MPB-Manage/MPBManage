@@ -13,16 +13,25 @@ public class AdditionalExpensesController {
         this.additionalExpensesService = additionalExpensesService;
     }
 
+    /**
+     * Get all additional expenses for a reservation
+     * */
     @GetMapping
     public void getAllAdditionalExpenses(@RequestParam int reservationId) {
         additionalExpensesService.getAllAdditionalExpenses(reservationId);
     }
 
+    /**
+     * Add additional expenses to a reservation
+     * */
     @PostMapping
     public void addAdditionalExpenses(@RequestBody AdditionalExpensesRequest additionalExpensesRequest) {
         additionalExpensesService.addAdditionalExpenses(additionalExpensesRequest);
     }
 
+    /**
+     * Update additional expenses for a reservation
+     * */
     @PutMapping
     public void updateAdditionalExpenses(@RequestBody AdditionalExpensesRequest additionalExpensesRequest) {
         additionalExpensesService.updateAdditionalExpenses(additionalExpensesRequest);

@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ *  Reservation setting service
+ * */
 @Service
 public class ReservationSettingService {
     private PropertyRepository propertyRepository;
@@ -20,6 +23,9 @@ public class ReservationSettingService {
         this.reservationSettingRepository = reservationSettingRepository;
     }
 
+    /**
+     *  Get reservation setting
+     * */
     public ReservationSettingResponse updateReservationSetting(String name, ReservationSettingRequest reservationSettingRequest) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));

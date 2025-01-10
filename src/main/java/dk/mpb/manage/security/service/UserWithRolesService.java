@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ *  User with roles service
+ * */
 @Service
 public class UserWithRolesService {
 
@@ -18,6 +21,9 @@ public class UserWithRolesService {
     this.userWithRolesRepository = userWithRolesRepository;
   }
 
+  /**
+   *  Add user with roles
+   * */
   public UserWithRolesResponse addUserWithRoles(UserWithRolesRequest body, Role role){
     if(userWithRolesRepository.existsById(body.getUsername())){
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"This user name is taken");

@@ -9,6 +9,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ *  Reservation entity
+ * */
 @Setter
 @Getter
 @AllArgsConstructor
@@ -31,6 +34,9 @@ public class Reservation {
     private String billingCity;
     private String billingZip;
     private String billingCountry;
+    /**
+     *  Property entity reference
+     * */
     @ManyToOne
     @JoinColumn(name = "property_id")
     private Property property;

@@ -7,11 +7,13 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.CorsConfigurationSource;
 import java.util.Arrays;
 
+/**
+ *  Cors configuration
+ * */
 @Configuration
 public class CorsConfig {
     private static final String[] ALLOWED_ORIGINS = new String[] {
             "*",
-            //"https://lobster-app-8gufx.ondigitalocean.app/",
     };
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ *  Additional expenses response DTO
+ * */
 @Getter
 @Setter
 @AllArgsConstructor

@@ -19,7 +19,9 @@ public class ReservationSettingController {
         this.reservationSettingService = reservationSettingService;
     }
 
-    //User - update reservation setting
+    /**
+     *  Update all reservation settings for a property
+     * */
     @PatchMapping
     public ReservationSettingResponse updateReservationSetting(Principal principal, @RequestBody ReservationSettingRequest reservationSettingRequest) {
         return reservationSettingService.updateReservationSetting(principal.getName(), reservationSettingRequest);

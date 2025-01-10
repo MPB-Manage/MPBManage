@@ -7,6 +7,9 @@ import dk.mpb.manage.project.repository.AdditionalExpensesRepository;
 import dk.mpb.manage.project.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ *  Additional expenses service
+ * */
 @Service
 public class AdditionalExpensesService {
 
@@ -14,20 +17,33 @@ public class AdditionalExpensesService {
 
     ReservationRepository reservationRepository;
 
+    /**
+     *  Constructor
+     * */
     public AdditionalExpensesService(AdditionalExpensesRepository additionalExpensesRepository, ReservationRepository reservationRepository) {
         this.additionalExpensesRepository = additionalExpensesRepository;
         this.reservationRepository = reservationRepository;
     }
+
+    /**
+     *  Get all additional expenses
+     * */
     public void getAllAdditionalExpenses(int reservationId) {
         additionalExpensesRepository.findAllByReservationId(reservationId);
     }
 
+    /**
+     *  Add additional expenses
+     * */
     public void addAdditionalExpenses(AdditionalExpensesRequest additionalExpensesRequest) {
         Reservation reservation = reservationRepository.findById(additionalExpensesRequest.getReservationId()).get();
         AdditionalExpenses additionalExpenses = new AdditionalExpenses(additionalExpensesRequest.getAmount(), additionalExpensesRequest.getDescription(), reservation);
         additionalExpensesRepository.save(additionalExpenses);
     }
 
+    /**
+     *  Update additional expenses
+     * */
     public void updateAdditionalExpenses(AdditionalExpensesRequest additionalExpensesRequest) {
         AdditionalExpenses additionalExpenses = additionalExpensesRepository.findById(additionalExpensesRequest.getId()).get();
         additionalExpenses.setAmount(additionalExpensesRequest.getAmount());

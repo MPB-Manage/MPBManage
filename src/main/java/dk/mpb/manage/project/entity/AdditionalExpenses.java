@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *  Additional expenses entity
+ * */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,6 +19,9 @@ public class AdditionalExpenses extends DateTimeInfo {
     private int id;
     private double amount;
     private String description;
+    /**
+     *  Reservation entity reference
+     * */
     @ManyToOne
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;

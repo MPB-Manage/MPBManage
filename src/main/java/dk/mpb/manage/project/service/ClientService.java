@@ -12,6 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ *  Client service
+ * */
 @Service
 public class ClientService {
     private ClientRepository clientRepository;
@@ -21,6 +24,10 @@ public class ClientService {
         this.clientRepository = clientRepository;
         this.propertyRepository = propertyRepository;
     }
+
+    /**
+     *  Get all clients for property
+     * */
     public List<ClientResponse> getAllClientForProperty(String name) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
@@ -28,6 +35,9 @@ public class ClientService {
         return clients.stream().map(client -> new ClientResponse(client)).toList();
     }
 
+    /**
+     *  Add client for property
+     * */
     public void addClientForProperty(String name, ClientRequest clientRequest) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
@@ -35,6 +45,9 @@ public class ClientService {
         clientRepository.save(client);
     }
 
+    /**
+     *  Update client for property
+     * */
     public void deleteClientForProperty(String name, int id) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));

@@ -17,6 +17,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ *  Custom OAuth2 authentication entry point
+ * */
 public class CustomOAuth2AuthenticationEntryPoint implements AuthenticationEntryPoint {
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
@@ -60,6 +63,9 @@ public class CustomOAuth2AuthenticationEntryPoint implements AuthenticationEntry
     response.getWriter().write(mapper.writeValueAsString(errorResponse));
   }
 
+  /**
+   *  Compute WWW-Authenticate header value
+   * */
   public static String computeWWWAuthenticateHeaderValue(Map<String, String> parameters) {
     StringJoiner wwwAuthenticate = new StringJoiner(", ", "Bearer ", "");
     if (!parameters.isEmpty()) {

@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ *  Property request DTO
+ * */
 @Getter
 @Setter
 @AllArgsConstructor

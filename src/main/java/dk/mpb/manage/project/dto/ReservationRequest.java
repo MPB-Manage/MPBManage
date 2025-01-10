@@ -8,6 +8,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ *  Reservation request DTO
+ * */
 @Setter
 @Getter
 @AllArgsConstructor

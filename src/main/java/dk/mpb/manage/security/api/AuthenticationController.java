@@ -28,14 +28,23 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 
+/**
+ *  Authentication controller
+ * */
 @RestController
 @RequestMapping("/api/auth/")
 @CrossOrigin
 public class AuthenticationController {
 
+  /**
+   *  Token issuer
+   * */
   @Value("${app.token-issuer}")
   private String tokenIssuer;
 
+  /**
+   *  Token expiration
+   * */
   @Value("${app.token-expiration}")
   private long tokenExpiration;
 
@@ -43,11 +52,17 @@ public class AuthenticationController {
 
   JwtEncoder encoder;
 
+  /**
+   *  Bucket settings
+   * */
   private final int BUCKET_CAPACITY = 5;
   private final int BUCKET_REFILL_AMOUNT = 5;
   private final int BUCKET_REFILL_TIME = 30;
   private final Map<String, Bucket> buckets = new ConcurrentHashMap<>();
 
+  /**
+   *  Create new bucket
+   * */
   private Bucket createNewBucket() {
     Bucket bucket = Bucket.builder()
             .addLimit(limit -> limit.capacity(BUCKET_CAPACITY).refillGreedy(BUCKET_REFILL_AMOUNT, Duration.ofMinutes(BUCKET_REFILL_TIME)))
@@ -55,6 +70,9 @@ public class AuthenticationController {
     return bucket;
   }
 
+  /**
+   *  Get bucket
+   * */
   private Bucket getBucket(String key){
     return buckets.computeIfAbsent(key, k -> createNewBucket());
   }
@@ -64,6 +82,9 @@ public class AuthenticationController {
     this.encoder = encoder;
   }
 
+  /**
+   *  Login user and return token
+   * */
   @PostMapping("login")
   public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
     String ip = httpRequest.getRemoteAddr();

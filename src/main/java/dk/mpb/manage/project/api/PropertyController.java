@@ -18,13 +18,17 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    //ADMIN - get all properties
+    /**
+     *  Get all properties
+     * */
     @GetMapping
     public List<PropertyResponse> getAllProperties() {
         return propertyService.getProperty();
     }
 
-    //ADMIN - create a property
+    /**
+     *  Create a property
+     * */
     @PostMapping
     public void createProperty(@RequestBody PropertyRequest propertyRequest) {
         propertyService.createProperty(propertyRequest);

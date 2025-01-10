@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 
 import static dk.mpb.manage.security.entity.Role.USER;
 
+/**
+ *  Developer data for testing
+ * */
 @Configuration
 public class DeveloperData implements ApplicationRunner {
     UserAccountRepository userAccountRepository;

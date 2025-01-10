@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *  Reservation setting response DTO
+ * */
 @Getter
 @Setter
 @AllArgsConstructor

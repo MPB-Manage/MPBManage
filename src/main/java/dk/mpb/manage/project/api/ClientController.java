@@ -17,14 +17,25 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+    /**
+     *  Get all clients for a property
+     * */
     @GetMapping
     public List<ClientResponse> getAllClientForProperty(Principal principal){
         return clientService.getAllClientForProperty(principal.getName());
     }
+
+    /**
+     * Add a client for a property
+     * */
     @PostMapping
     public void addClientForProperty(Principal principal, @RequestBody ClientRequest clientRequest){
         clientService.addClientForProperty(principal.getName(), clientRequest);
     }
+
+    /**
+     *  Update a client for a property
+     * */
     @DeleteMapping
     public void deleteClientForProperty(Principal principal, @PathVariable int id){
         clientService.deleteClientForProperty(principal.getName(), id);

@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *  Client entity
+ * */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,6 +22,9 @@ public class Client extends DateTimeInfo {
     private String name;
     private String email;
     private String description;
+    /**
+     *  Property entity reference
+     * */
     @ManyToOne
     @JoinColumn(name = "property_id")
     private Property property;

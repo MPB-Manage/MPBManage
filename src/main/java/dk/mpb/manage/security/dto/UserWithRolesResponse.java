@@ -7,6 +7,9 @@ import lombok.Setter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *  User with roles response DTO
+ * */
 @Getter
 @Setter
 public class UserWithRolesResponse {

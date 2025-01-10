@@ -17,6 +17,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *  User with roles entity
+ * */
 @Configurable
 @Getter
 @Setter
@@ -59,6 +62,9 @@ public class UserWithRoles implements UserDetails {
     setPassword(password);
   }
 
+  /**
+   *  Set password
+   * */
   public void setPassword(String pw) {
     this.password = passwordEncoder.encode(pw);
   }

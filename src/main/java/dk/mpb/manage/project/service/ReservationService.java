@@ -12,6 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ *  Reservation service
+ * */
 @Service
 public class ReservationService {
     private ReservationRepository reservationRepository;
@@ -21,6 +24,10 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
         this.propertyRepository = propertyRepository;
     }
+
+    /**
+     *  Get all reservations
+     * */
     public List<ReservationResponse> getAllReservations(String name) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
@@ -28,6 +35,10 @@ public class ReservationService {
         System.out.println(reservations);
         return reservations.stream().map(res -> new ReservationResponse(res)).toList();
     }
+
+    /**
+     *  Get all reservations by year
+     * */
     public List<ReservationResponse> getAllReservationsByYear(String name, int year) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
@@ -35,6 +46,9 @@ public class ReservationService {
         return reservations.stream().map(res -> new ReservationResponse(res)).toList();
     }
 
+    /**
+     *  Create reservation
+     * */
     public void createReservation(String name, ReservationRequest reservationRequest) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
@@ -42,6 +56,9 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
+    /**
+     *  Delete reservation
+     * */
     public void deleteReservation(String name, int id) {
         Property property = propertyRepository.findByUserAccountName(name)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
