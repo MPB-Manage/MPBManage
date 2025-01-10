@@ -13,7 +13,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PropertySettingRequest {
     private String street;
     private String city;

@@ -36,4 +36,5 @@ public class PropertyService {
         Property property = new Property(propertyRequest.getName());
         propertyRepository.save(property);
     }
+
 }

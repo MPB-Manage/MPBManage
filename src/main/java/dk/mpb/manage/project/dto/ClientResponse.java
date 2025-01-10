@@ -16,12 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClientResponse {
+    private int id;
     private int telephoneNumber;
     private String name;
     private String email;
     private String description;
 
     public ClientResponse(Client client){
+        this.id = client.getId();
         this.telephoneNumber = client.getTelephoneNumber();
         this.name = client.getName();
         this.email = client.getEmail();

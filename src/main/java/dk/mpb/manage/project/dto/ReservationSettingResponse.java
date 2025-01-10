@@ -14,7 +14,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReservationSettingResponse {
     private double standardPrice;
     private double JanuaryPrice;

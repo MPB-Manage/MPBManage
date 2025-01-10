@@ -3,10 +3,7 @@ package dk.mpb.manage.project.api;
 import dk.mpb.manage.project.dto.ReservationSettingRequest;
 import dk.mpb.manage.project.dto.ReservationSettingResponse;
 import dk.mpb.manage.project.service.ReservationSettingService;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -19,6 +16,13 @@ public class ReservationSettingController {
         this.reservationSettingService = reservationSettingService;
     }
 
+    /**
+     *  Get all reservation settings for a property
+     * */
+    @GetMapping
+    public ReservationSettingResponse getAllReservationSettings(Principal principal) {
+        return reservationSettingService.getAllReservationSettings(principal.getName());
+    }
     /**
      *  Update all reservation settings for a property
      * */

@@ -36,7 +36,7 @@ public class ClientController {
     /**
      *  Update a client for a property
      * */
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteClientForProperty(Principal principal, @PathVariable int id){
         clientService.deleteClientForProperty(principal.getName(), id);
     }

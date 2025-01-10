@@ -61,4 +61,12 @@ public class ReservationSettingService {
         ReservationSetting reservationSettingResponse = reservationSettingRepository.save(reservationSetting);
         return new ReservationSettingResponse(reservationSettingResponse);
     }
+
+    public ReservationSettingResponse getAllReservationSettings(String name) {
+        Property property = propertyRepository.findByUserAccountName(name)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
+        ReservationSetting reservationSetting = reservationSettingRepository.findByPropertyId(property.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation setting not found"));
+        return new ReservationSettingResponse(reservationSetting);
+    }
 }

@@ -19,6 +19,14 @@ public class PropertySettingController {
     }
 
     /**
+     *  Get all property settings for a property
+     * */
+    @GetMapping
+    public PropertySettingResponse getAllPropertySettings(Principal principal) {
+        return propertySettingService.getAllPropertySettings(principal.getName());
+    }
+
+    /**
      *  Update all property settings for a property
      * */
     @PatchMapping

@@ -49,4 +49,11 @@ public class PropertySettingService {
         PropertySetting propertySettingResponse = propertySettingRepository.save(propertySetting);
         return new PropertySettingResponse(propertySettingResponse);
     }
+
+    public PropertySettingResponse getAllPropertySettings(String name) {
+        Property property = propertyRepository.findByUserAccountName(name)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Property not found"));
+        List<PropertySetting> propertySettings = propertySettingRepository.findAllByPropertyId(property.getId());
+        return new PropertySettingResponse(propertySettings.get(0));
+    }
 }
